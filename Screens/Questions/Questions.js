@@ -6,8 +6,10 @@ import Question from './Question'
 import { data } from './data'
 import { useData } from '../../context/DataContext'
 import { successRate } from '../../functions/successRate'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Questions() {
+  const navigation = useNavigation()
   const {handleData} = useData()
   const [userAnswer, setUserAnswer] = useState([])
   const width = useSharedValue(60)
@@ -22,6 +24,8 @@ export default function Questions() {
       const finalUserValue = [...userAnswer, value]
       const score = successRate(finalUserValue, correctAnswers)
       handleData(score, finalUserValue)
+      console.log('finished')
+      navigation.navigate('results')
 
     }
     else{
@@ -39,7 +43,7 @@ export default function Questions() {
           </View>
         </View>
         <Text style={styles.title}>Javascript Quiz</Text>
-        <Question key={data.indexOf([currQuestion.index])} question={data[currQuestion.index]} handleClick={handleClick} lastQuestion={lastQuestion}/>
+        <Question key={data[currQuestion.index].question} question={data[currQuestion.index]} handleClick={handleClick} lastQuestion={lastQuestion}/>
       </SafeAreaView>
     </SafeAreaProvider>
   )

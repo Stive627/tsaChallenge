@@ -6,6 +6,7 @@ import WaveSvg from './components/Wave';
 import HeaderWelcome from './Screens/Welcome/HeaderWelcome';
 import Questions from './Screens/Questions/Questions';
 import { DataProvider } from './context/DataContext';
+import Results from './Screens/Results/Results';
 
 const Stack = createNativeStackNavigator()
 
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Navigator initialRouteName='Welcome'  >
           <Stack.Screen options={{header:()=> <HeaderWelcome/>}} name='Welcome' component={Welcome}/>
           <Stack.Screen name='Questions' component={Questions} options={{header:()=><View></View>}}/>
+          <Stack.Screen name='results' options={{header:()=> <View></View>}} component={Results}/>
         </Stack.Navigator>
       </NavigationContainer>
     </DataProvider>

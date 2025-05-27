@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 export default function Question({question, handleClick, lastQuestion}) {
   const [currSuggestion, setCurrSuggestion] = useState(undefined)
-  console.log(question)
+  console.log(currSuggestion)
   function select(indx){
     if(indx === currSuggestion){
       setCurrSuggestion(undefined)
@@ -18,9 +18,11 @@ export default function Question({question, handleClick, lastQuestion}) {
     <View style={styles.container}>
         <Text style={styles.question}>{question.question}</Text>
         <View style={styles.suggestion}>
-            {question.suggestions.map((elt, indx) => <Pressable key={indx}  onPress={()=>select(indx)} style={[styles.pressable, {borderColor:'rgba(157, 78, 221, 1)'}]}><Text style={{color:indx === currSuggestion? 'white':'rgba(157, 78, 221, 1)'}}>{alphabet[indx]} {elt}</Text></Pressable>)}
+            {question.suggestions.map((elt, indx) => <Pressable key={indx} onPress={()=>select(indx)} style={[styles.pressable, {backgroundColor:indx === currSuggestion ? 'rgba(157, 78, 221, 1)':'transparent'}]}><Text style={{color:indx === currSuggestion? 'white':'rgba(157, 78, 221, 1)'}}>{alphabet[indx]} {elt}</Text></Pressable>)}
         </View>
-        <Pressable style={styles.pressableSubmit}  disabled = {currSuggestion === undefined} onPress={() => handleClick(currSuggestion)}><Text style={styles.submitButton}>{lastQuestion? 'Finish' : 'Next'}</Text></Pressable>
+        <View style={styles.pressableSubmit}>
+          <Pressable disabled = {currSuggestion === undefined} onPress={() => handleClick(currSuggestion)}><Text style={styles.submitButton}>{lastQuestion? 'Finish' : 'Next'}</Text></Pressable>
+        </View>
     </View>
   )
 }
@@ -51,14 +53,18 @@ const styles = StyleSheet.create({
         paddingVertical:4,
         paddingHorizontal:3,
         borderRadius:4,
-        borderWidth:1
+        borderWidth:1,
+        borderColor:'rgba(157, 78, 221, 1)',
+        backgroundColor:''
     },
     submitButton:{
         color:'rgba(181, 23, 158, 1)',
         fontSize:17,
-        
     },
     pressableSubmit:{
-
+      flexDirection:'row',
+      marginTop:12,
+      justifyContent:'flex-end',
+      cursor:'pointer'
     }
 })
