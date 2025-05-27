@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {DrawerActions, NavigationContainer} from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import Welcome from './Screens/Welcome/Welcome';
+import { Text, View } from 'react-native';
+import WaveSvg from './components/Wave';
+import HeaderWelcome from './Screens/Welcome/HeaderWelcome';
+import Questions from './Screens/Questions/Questions';
+import { DataProvider } from './context/DataContext';
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <DataProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Welcome'  >
+          <Stack.Screen options={{header:()=> <HeaderWelcome/>}} name='Welcome' component={Welcome}/>
+          <Stack.Screen name='Questions' component={Questions} options={{header:()=><View></View>}}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </DataProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
