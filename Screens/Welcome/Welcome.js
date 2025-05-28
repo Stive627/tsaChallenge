@@ -1,13 +1,15 @@
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context'
 import { Button, Image, Pressable, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import WaveSvg from '../../components/Wave'
 
 export default function Welcome() {
   const navigation = useNavigation()
   return (
     <SafeAreaProvider>
-        <SafeAreaView>
-           <View style={{justifyContent:'center', flexDirection:'row', marginVertical:30}}>
+        <SafeAreaView edges={['top']}>
+          <WaveSvg/>
+           <View style={{justifyContent:'center', flexDirection:'row'}}>
             <Image width={100} height={100} source={{uri:'https://tsa-challenges.s3.ap-south-1.amazonaws.com/ChatGPT_Image_May_17__2025__10_24_45_PM-removebg-preview.png'}}/>
            </View>
            <Text style={{fontWeight:'bold', color:'rgba(123, 44, 191, 1)', fontSize:35, textAlign:'center'}}>Welcome to Javascript Quizzes</Text>

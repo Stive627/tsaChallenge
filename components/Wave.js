@@ -2,7 +2,7 @@ import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 const WaveSvg = () => (
-  <Svg viewBox="0 0 1440 320"  rotation={180} style={{marginTop:20}} xmlns="http://www.w3.org/2000/svg" width="100%" height={100}>
+  <Svg viewBox="0 0 1440 320"  rotation={180}  xmlns="http://www.w3.org/2000/svg" width="100%" height={100}>
     <Path
       fill="#C77DFF"
       fillOpacity="1" 
