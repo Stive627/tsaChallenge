@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import Question from './Question'
-import { data } from './data'
+import { datas } from './data'
 import { useData } from '../../context/DataContext'
 import { successRate } from '../../functions/successRate'
 import { useNavigation } from '@react-navigation/native'
@@ -13,7 +13,7 @@ export default function Questions() {
   const {handleData} = useData()
   const [userAnswer, setUserAnswer] = useState([])
   const width = useSharedValue(60)
-  const questions = [...data]
+  const questions = [...datas]
   const percentage = (1/questions.length)*100
   const [currQuestion, setCurrQuestion] = useState({index:0, percent:percentage})
   const correctAnswers = questions.map(elt => elt.answer)
@@ -24,7 +24,6 @@ export default function Questions() {
       const finalUserValue = [...userAnswer, value]
       const score = successRate(finalUserValue, correctAnswers)
       handleData(score, finalUserValue)
-      console.log('finished')
       navigation.navigate('results')
 
     }
@@ -43,7 +42,7 @@ export default function Questions() {
           </View>
         </View>
         <Text style={styles.title}>Javascript Quiz</Text>
-        <Question key={data[currQuestion.index].question} question={data[currQuestion.index]} handleClick={handleClick} lastQuestion={lastQuestion}/>
+        <Question key={datas[currQuestion.index].question} question={datas[currQuestion.index]} handleClick={handleClick} lastQuestion={lastQuestion}/>
       </SafeAreaView>
     </SafeAreaProvider>
   )
@@ -51,7 +50,9 @@ export default function Questions() {
 
 const styles = StyleSheet.create({
   safearea:{
-    paddingHorizontal:7
+    paddingHorizontal:7,
+    flex:1,
+    backgroundColor:'white'
   },
   container:{
     flexDirection:'row',

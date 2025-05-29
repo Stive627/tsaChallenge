@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Pressable, Button } from 'react-native'
+import { View, Text, StyleSheet, Image, Pressable} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import WaveSvg from '../../components/Wave'
@@ -9,7 +9,6 @@ import { useNavigation } from '@react-navigation/native'
 export default function Results() {
     const {data} = useData()
     const [percentage, setPercentage] = useState(0)
-    console.log(data)
     useEffect(()=>{
     if(percentage <data.score){
       const timeId = setTimeout(() => setPercentage(percentage + 1), 50);
@@ -45,7 +44,6 @@ export default function Results() {
   )
 }
 const styles = StyleSheet.create({
-
     title:{
     textAlign:'center',
     fontSize:25,

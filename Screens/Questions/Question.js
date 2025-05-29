@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 export default function Question({question, handleClick, lastQuestion}) {
   const [currSuggestion, setCurrSuggestion] = useState(undefined)
-  console.log(currSuggestion)
   function select(indx){
     if(indx === currSuggestion){
       setCurrSuggestion(undefined)
@@ -18,7 +17,7 @@ export default function Question({question, handleClick, lastQuestion}) {
     <View style={styles.container}>
         <Text style={styles.question}>{question.question}</Text>
         <View style={styles.suggestion}>
-            {question.suggestions.map((elt, indx) => <Pressable key={indx} onPress={()=>select(indx)} style={[styles.pressable, {backgroundColor:indx === currSuggestion ? 'rgba(157, 78, 221, 1)':'transparent'}]}><Text style={{color:indx === currSuggestion? 'white':'rgba(157, 78, 221, 1)'}}>{alphabet[indx]} {elt}</Text></Pressable>)}
+            {question.data.map((elt, indx) => <Pressable key={indx} onPress={()=>select(indx)} style={[styles.pressable, {backgroundColor:indx === currSuggestion ? 'rgba(157, 78, 221, 1)':'transparent'}]}><Text style={{color:indx === currSuggestion? 'white':'rgba(157, 78, 221, 1)'}}>{alphabet[indx]} {elt}</Text></Pressable>)}
         </View>
         <View style={styles.pressableSubmit}>
           <Pressable disabled = {currSuggestion === undefined} onPress={() => handleClick(currSuggestion)}><Text style={styles.submitButton}>{lastQuestion? 'Finish' : 'Next'}</Text></Pressable>
