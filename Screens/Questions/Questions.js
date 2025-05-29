@@ -1,23 +1,30 @@
 import { StyleSheet, Text, View} from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
-import Animated, { useSharedValue } from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import Question from './Question'
 import { datas } from './data'
 import { useData } from '../../context/DataContext'
 import { successRate } from '../../functions/successRate'
 import { useNavigation } from '@react-navigation/native'
+import Mode from '../../components/Mode'
 
 export default function Questions() {
   const navigation = useNavigation()
   const {handleData} = useData()
   const [userAnswer, setUserAnswer] = useState([])
-  const width = useSharedValue(60)
   const questions = [...datas]
   const percentage = (1/questions.length)*100
   const [currQuestion, setCurrQuestion] = useState({index:0, percent:percentage})
   const correctAnswers = questions.map(elt => elt.answer)
   const lastQuestion = currQuestion.index === questions.length -1
+  const width = useSharedValue(currQuestion.percent)
+  const animatedStyles = useAnimatedStyle(()=>({
+    width: `${width.value}%`
+  }))
+  
+  width.value = withTiming(currQuestion.percent)
+
 
   function handleClick(value){
     if(lastQuestion){
@@ -38,8 +45,9 @@ export default function Questions() {
         <View style={styles.container}>
           <View style={styles.header}>
             <View style={styles.header1}></View>
-            <Animated.View style={[styles.header2, {width:`${currQuestion.percent}%`}]}></Animated.View>
+            <Animated.View style={[styles.header2, animatedStyles]}></Animated.View>
           </View>
+          <Mode/>
         </View>
         <Text style={styles.title}>Javascript Quiz</Text>
         <Question key={datas[currQuestion.index].question} question={datas[currQuestion.index]} handleClick={handleClick} lastQuestion={lastQuestion}/>

@@ -1,10 +1,12 @@
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context'
 import {Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import WaveSvg from '../../components/Wave'
-
+import Entypo from  'react-native-vector-icons/Entypo'
 export default function Welcome() {
   const navigation = useNavigation()
+  const theme = useTheme()
+  console.log(theme)
   return (
     <SafeAreaProvider>
         <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -27,7 +29,8 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   safeArea:{
     flex:1,
-    backgroundColor:'white'
+    backgroundColor:'white', 
+    marginTop:23
   },
   container:{
     justifyContent:'center',

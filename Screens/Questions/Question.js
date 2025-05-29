@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 export default function Question({question, handleClick, lastQuestion}) {
   const [currSuggestion, setCurrSuggestion] = useState(undefined)
+  
   function select(indx){
     if(indx === currSuggestion){
       setCurrSuggestion(undefined)
